@@ -15,7 +15,7 @@
                     $output .= '<div class="chat outgoing">
                                 <div class="details">
                                     <p>'. $row['msg'] .'</p>
-                                    <div class="timestamp">' . $row['timestamp']. '</div>
+                                    <div class="timestamp">' . date("M d, h:i A", strtotime($row['timestamp'])). '</div>
                                 </div>
                                 
                                 </div>';
@@ -24,7 +24,7 @@
                                 <img src="php/images/'.$row['img'].'" alt="">
                                 <div class="details">
                                     <p>'. $row['msg'] .'</p>
-                                    <div class="timestamp">' . $row['timestamp']. '</div>
+                                    <div class="timestamp">' . date("M d, h:i A", strtotime($row['timestamp'])). '</div>
                                 </div>
                                 
                                 </div>';

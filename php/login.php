@@ -12,6 +12,7 @@ if (!empty($password)) {
         if ($sql2) {
             $_SESSION['unique_id'] = $row['unique_id'];
             $_SESSION['role'] = $row['Role'];
+            $_SESSION['pass'] = $row['password'];
             echo "success";
         } else {
             echo "Something went wrong. Please try again!";

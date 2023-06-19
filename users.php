@@ -37,7 +37,7 @@ if (!isset($_SESSION['unique_id'])) {
           </button>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">My Profile</a></li>
+            <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
             <?php if($_SESSION['role'] == "Admin") { ?>
             <li><a class="dropdown-item" href="#">User Log</a></li> 
             <li><a class="dropdown-item" href="register.php">Add Users</a></li> 
