@@ -8,6 +8,7 @@
             $lastseen = date('Y-m-d H:i:s');
             $status = "Offline now";
             $sql = mysqli_query($conn, "UPDATE users SET status = '{$status}', lastseen = '{$lastseen}' WHERE unique_id={$_GET['logout_id']}");
+            $sql2 = mysqli_query($conn, "UPDATE session_data SET logouttime = '{$lastseen}' WHERE session_id = '{$_SESSION['session_id']}'");
             if($sql){
                 session_unset();
                 session_destroy();

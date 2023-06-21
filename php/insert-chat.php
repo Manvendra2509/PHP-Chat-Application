@@ -8,8 +8,8 @@
         $message = mysqli_real_escape_string($conn, $_POST['message']);
         $timestamp = date('Y-m-d H:i:s');
         if(!empty($message)){
-            $sql = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg, timestamp)
-                                        VALUES ({$incoming_id}, {$outgoing_id}, '{$message}','{$timestamp}')") or die();
+            $sql = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg, timestamp, session_id)
+                                        VALUES ({$incoming_id}, {$outgoing_id}, '{$message}','{$timestamp}', '{$_SESSION['session_id']}')") or die();
         }
     }else{
         header("location: ../index.php");

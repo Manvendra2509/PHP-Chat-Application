@@ -14,7 +14,8 @@ if (!isset($_SESSION['unique_id'])) {
       <header>
         <div class="content">
           <?php
-          $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+          $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_GET['user_id']}");
+          $_SESSION['userlog-id'] = $_GET['user_id'];
           if (mysqli_num_rows($sql) > 0) {
             $row = mysqli_fetch_assoc($sql);
           }
@@ -37,18 +38,12 @@ if (!isset($_SESSION['unique_id'])) {
             </svg>
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
-            <?php if($_SESSION['role'] == "Admin") { ?>
-            <li><a class="dropdown-item" href="chatlog.php">User Log</a></li> 
-            <li><a class="dropdown-item" href="register.php">Add Users</a></li> 
-            <?php } ?>
-            <li><a class="dropdown-item" href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>">Logout</a></li>
+            <li><a class="dropdown-item" href="chatlog.php">Back</a></li>
           </ul>
         </div>
       </header>
       <div class="search">
-        <span class="text">Select a user to start chat</span>
+        <span class="text">Select a session to view session log</span>
         <input type="text" placeholder="Enter name to search...">
         <button><i class="fas fa-search"></i></button>
       </div>
@@ -60,10 +55,10 @@ if (!isset($_SESSION['unique_id'])) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
     crossorigin="anonymous"></script>
-  <script src="javascript/users.js"></script>
+  <script src="javascript/userlog.js"></script>
   <script>
         var uniqueId = "<?php echo $_SESSION['unique_id']; ?>";
-  </script>
+    </script>
   <script src="javascript/timeout.js"></script>
 </body>
 

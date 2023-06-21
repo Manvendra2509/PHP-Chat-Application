@@ -2,6 +2,7 @@
 session_start();
 if ($_SESSION['role'] != "Admin") {
   header("location: users.php");
+  $_SESSION['last_activity'] = time();
 }
 ?>
 
@@ -53,7 +54,10 @@ if ($_SESSION['role'] != "Admin") {
 
   <script src="javascript/pass-show-hide.js"></script>
   <script src="javascript/signup.js"></script>
-
+  <script>
+        var uniqueId = "<?php echo $_SESSION['unique_id']; ?>";
+    </script>
+  <script src="javascript/timeout.js"></script>
 </body>
 
 </html>

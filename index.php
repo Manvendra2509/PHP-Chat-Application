@@ -27,6 +27,9 @@ if (isset($_SESSION['unique_id'])) {
   </div>
 
   <script src="javascript/pass-show-hide.js"></script>
+  <script>
+        var uniqueId = "<?php echo $_SESSION['unique_id']; ?>";
+    </script>
   <script src="javascript/login.js"></script>
 
 </body>

@@ -3,6 +3,7 @@ session_start();
 include_once "php/config.php";
 if (!isset($_SESSION['unique_id'])) {
   header("location: index.php");
+  $_SESSION['last_activity'] = time();
 }
 
 ?>
@@ -31,21 +32,21 @@ if (!isset($_SESSION['unique_id'])) {
             <?php echo $row['fname'] . " " . $row['lname'] ?>
           </span>
           <?php
-          $current_timestamp = time(); // Get the current timestamp
-          $logout_time = strtotime($row['lastseen']); // Convert the logout timestamp to a Unix timestamp
+          $current_timestamp = time();
+          $logout_time = strtotime($row['lastseen']);
           $time_difference = $current_timestamp - $logout_time;
-          $time_difference_hours = round($time_difference / (60 * 60)); // Convert the time difference to hours
+          $time_difference_hours = round($time_difference / (60 * 60));
           if ($row['status'] == "Offline now") {
-          if ($time_difference_hours < 1) {
-            $last_seen_message = "Last seen less than an hour ago";
-          } elseif ($time_difference_hours == 1) {
-            $last_seen_message = "Last seen 1 hour ago";
+            if ($time_difference_hours < 1) {
+              $last_seen_message = "Last seen less than an hour ago";
+            } elseif ($time_difference_hours == 1) {
+              $last_seen_message = "Last seen 1 hour ago";
+            } else {
+              $last_seen_message = "Last seen " . $time_difference_hours . " hours ago";
+            }
           } else {
-            $last_seen_message = "Last seen " . $time_difference_hours . " hours ago";
+            $last_seen_message = "Active now";
           }
-        } else {
-          $last_seen_message = "Active now";
-        }
 
           ?>
           <p>
@@ -65,6 +66,10 @@ if (!isset($_SESSION['unique_id'])) {
     </section>
   </div>
   <script src="javascript/chat.js"></script>
+  <script>
+    var uniqueId = "<?php echo $_SESSION['unique_id']; ?>";
+  </script>
+  <script src="javascript/timeout.js"></script>
 
 </body>
 

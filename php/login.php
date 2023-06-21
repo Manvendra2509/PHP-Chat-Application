@@ -1,5 +1,6 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Kolkata');
 include_once "config.php";
 $password = mysqli_real_escape_string($conn, $_POST['password']);
 $user_pass = md5($password);
@@ -8,11 +9,16 @@ if (!empty($password)) {
     if (mysqli_num_rows($sql) > 0) {
         $row = mysqli_fetch_assoc($sql);
         $status = "Active now";
+        
         $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
         if ($sql2) {
             $_SESSION['unique_id'] = $row['unique_id'];
-            $_SESSION['role'] = $row['Role'];
+            $_SESSION['role'] = $row['role'];
             $_SESSION['pass'] = $row['password'];
+            $_SESSION['logintime'] = date('Y-m-d H:i:s');
+            $sql3 = mysqli_query($conn, "INSERT INTO session_data (user_id, logintime)
+                                VALUES ('{$_SESSION['unique_id']}','{$_SESSION['logintime']}')");
+            $_SESSION['session_id'] = mysqli_insert_id($conn);
             echo "success";
         } else {
             echo "Something went wrong. Please try again!";

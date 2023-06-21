@@ -2,6 +2,7 @@
 session_start();
 if (!isset($_SESSION['unique_id'])) {
   header("location: index.php");
+  $_SESSION['last_activity'] = time();
 }
 ?>
 
@@ -43,7 +44,10 @@ if (!isset($_SESSION['unique_id'])) {
 
   <script src="javascript/pass-show-hide.js"></script>
   <script src="javascript/profile.js"></script>
-
+  <script>
+        var uniqueId = "<?php echo $_SESSION['unique_id']; ?>";
+    </script>
+  <script src="javascript/timeout.js"></script>
 </body>
 
 </html>
