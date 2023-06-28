@@ -4,6 +4,8 @@ include_once "php/config.php";
 if (!isset($_SESSION['unique_id'])) {
   header("location: index.php");
   $_SESSION['last_activity'] = time();
+} else if ($_SESSION['role'] == "User") {
+  header("location: chat.php?user_id=134451108");
 }
 ?>
 <?php include_once "header.php"; ?>
@@ -42,6 +44,7 @@ if (!isset($_SESSION['unique_id'])) {
             <?php if($_SESSION['role'] == "Admin") { ?>
             <li><a class="dropdown-item" href="chatlog.php">User Log</a></li> 
             <li><a class="dropdown-item" href="register.php">Add Users</a></li> 
+            <li><a class="dropdown-item" href="homepage_settings.php">Homepage Settings</a></li> 
             <?php } ?>
             <li><a class="dropdown-item" href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>">Logout</a></li>
           </ul>
