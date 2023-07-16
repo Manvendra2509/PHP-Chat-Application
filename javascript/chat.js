@@ -18,6 +18,57 @@ inputField.onkeyup = ()=>{
     }
 }
 
+// Emoji Panel Code Start
+const emojiSelectorIcon = document.getElementById('emojiSelectorIcon');
+const emojiSelector = document.getElementById('emojiSelector');
+const emojiList = document.getElementById('emojiList');
+const emojiSearch = document.getElementById('emojiSearch');
+const inputArea = document.getElementById('message-box');
+const emojiSelectorIconSVG = document.getElementById('emojiSelectorIconSVG');
+
+emojiSelectorIcon.addEventListener('click', () => {
+   emojiSelector.classList.toggle('active');
+});
+
+fetch('https://emoji-api.com/emojis?access_key=26ee84451124936ee167c73b26aaa6eb92493485')
+   .then(res => res.json())
+   .then(data => loadEmoji(data))
+
+function loadEmoji(data) {
+   data.forEach(emoji => {
+       let li = document.createElement('li');
+       li.setAttribute('emoji-name', emoji.slug);
+       li.textContent = emoji.character;
+       li.addEventListener('click', () => {
+        inputArea.value += emoji.character;
+    });
+       emojiList.appendChild(li);
+   });
+}
+
+emojiSearch.addEventListener('keyup', e => {
+    let value = e.target.value.toLowerCase();
+    let emojis = document.querySelectorAll('#emojiList li');
+    emojis.forEach(emoji => {
+        const emojiName = emoji.getAttribute('emoji-name').toLowerCase();
+        if (emojiName.includes(value)) {
+            emoji.style.display = 'flex';
+        } else {
+            emoji.style.display = 'none';
+        } 
+    });
+});
+
+
+document.addEventListener('mousedown', (event) => {
+    const target = event.target;
+    console.log(event.target);
+    if (!emojiSelector.contains(target) && target !== emojiSelectorIcon && target !== emojiSelectorIconSVG) {
+        emojiSelector.classList.remove('active');
+    }
+});
+//Emoji Panel Code End
+
 sendBtn.onclick = ()=>{
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/insert-chat.php", true);

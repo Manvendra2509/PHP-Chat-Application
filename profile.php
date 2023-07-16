@@ -1,12 +1,17 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Kolkata');
 if (!isset($_SESSION['unique_id'])) {
   header("location: index.php");
   $_SESSION['last_activity'] = time();
 }
 ?>
 
-<?php include_once "header.php"; ?>
+<?php include_once "header.php";
+include_once "php/config.php";
+$timestamp = date('Y-m-d H:i:s');
+$sql1 = mysqli_query($conn, "INSERT INTO activity (user_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}', '{$timestamp}', 'Opened profile settings page')");
+?>
 
 <body>
   <div class="wrapper">

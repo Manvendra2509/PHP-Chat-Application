@@ -26,14 +26,22 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `session_id` (
-  `session_id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(255) NOT NULL,
-  `logintime` timestamp NULL,
-  `logouttime` timestamp NULL,
-  PRIMARY KEY (`session_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `activity` (
+  `activity_id` int(11) NOT NULL,
+  `timestamp` timestamp NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `activity_description` mediumtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `lastseen`, `role`) 
 VALUES (NULL, '134451108', 'Manvendra', 'Singh', 'msingh4@baskethunt.in', '8bbdc640ad83fe10b589af830cc5f6cf', '1686739850IMG_20221218_184509.png', 'Active now', '2023-06-20 18:38:37', 'Admin')
 COMMIT;
+
+CREATE TABLE `homepage` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `display` enum('Yes','No','','') NOT NULL DEFAULT 'Yes'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `homepage` (`id`, `title`, `display`) VALUES
+(0, 'ChatApp', 'No');

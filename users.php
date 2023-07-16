@@ -42,11 +42,11 @@ if (!isset($_SESSION['unique_id'])) {
             <li><a class="dropdown-item" href="#">Settings</a></li>
             <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
             <?php if($_SESSION['role'] == "Admin") { ?>
-            <li><a class="dropdown-item" href="chatlog.php">User Log</a></li> 
+            <li><a class="dropdown-item" href="log.php">User Log</a></li> 
             <li><a class="dropdown-item" href="register.php">Add Users</a></li> 
             <li><a class="dropdown-item" href="homepage_settings.php">Homepage Settings</a></li> 
             <?php } ?>
-            <li><a class="dropdown-item" href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>">Logout</a></li>
+            <li><a class="dropdown-item" href="php/logout.php?logout_id=<?php echo $_SESSION['unique_id']; ?>">Logout</a></li>
           </ul>
         </div>
       </header>
