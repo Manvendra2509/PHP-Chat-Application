@@ -1,24 +1,31 @@
 <?php
 session_start();
+date_default_timezone_set('Asia/Kolkata');
 include_once "php/config.php";
-if (!isset($_SESSION['unique_id'])) {
+if (!isset($_SESSION['unique_id']) or $_SESSION['role'] != "Admin") {
     header("location: index.php");
     $_SESSION['last_activity'] = time();
+} else {
+    if (!isset($_GET['user_id'])){
+        header("location: log.php");
+    }
 }
 ?>
 <?php include_once "header.php"; ?>
 
 <body>
     <div class="wrapper">
-        <section class="users">
+        <section class="activity">
             <header>
                 <div class="content">
                     <?php
-                    $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_SESSION['unique_id']}");
+                    $sql = mysqli_query($conn, "SELECT * FROM users WHERE unique_id = {$_GET['user_id']}");
+                    $_SESSION['userlog-id'] = $_GET['user_id'];
                     if (mysqli_num_rows($sql) > 0) {
                         $row = mysqli_fetch_assoc($sql);
                     }
                     ?>
+                    <a href="log.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
                     <img src="php/images/<?php echo $row['img']; ?>" alt="">
                     <div class="details">
                         <span>
@@ -38,24 +45,19 @@ if (!isset($_SESSION['unique_id'])) {
                         </svg>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="users.php">Back</a></li>
                         <li><a class="dropdown-item" href="#">Settings</a></li>
                         <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
                         <?php if ($_SESSION['role'] == "Admin") { ?>
-                            <li><a class="dropdown-item" href="#">User Log</a></li>
+                            <li><a class="dropdown-item" href="log.php">User Log</a></li>
                             <li><a class="dropdown-item" href="register.php">Add Users</a></li>
+                            <li><a class="dropdown-item" href="homepage_settings.php">Homepage Settings</a></li>
                         <?php } ?>
                         <li><a class="dropdown-item"
-                                href="php/logout.php?logout_id=<?php echo $row['unique_id']; ?>">Logout</a></li>
+                                href="php/logout.php?logout_id=<?php echo $_SESSION['unique_id']; ?>">Logout</a></li>
                     </ul>
                 </div>
             </header>
-            <div class="search">
-                <span class="text">Select a user to view chat log</span>
-                <input type="text" placeholder="Enter name to search...">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-            <div class="users-list">
+            <div class="activity-list">
 
             </div>
         </section>
@@ -63,12 +65,11 @@ if (!isset($_SESSION['unique_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
-    <script src="javascript/chatlog.js"></script>
+    <script src="javascript/activitylog.js"></script>
     <script>
         var uniqueId = "<?php echo $_SESSION['unique_id']; ?>";
     </script>
     <script src="javascript/timeout.js"></script>
-
 </body>
 
 </html>
