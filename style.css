@@ -368,7 +368,7 @@ header > .details {
 }
 .chat-box .outgoing .details {
   margin-left: auto;
-  max-width: calc(100% - 130px);
+  max-width: 85%;
 }
 .outgoing .details {
   background: #333;
@@ -378,20 +378,46 @@ header > .details {
 .chat-box .incoming {
   display: flex;
 }
-.chat-box .incoming img {
+.chat-box .incoming .incoming-img {
   height: 35px;
   width: 35px;
 }
 .chat-box .incoming .details {
   margin-right: auto;
   margin-left: 10px;
-  max-width: calc(100% - 130px);
+  max-width: 85%;
 }
 .incoming .details {
   background: #fff;
   color: #333;
   border-radius: 0 10px 10px 10px;
 }
+
+.details-wrapper {
+  max-width: 50%!important;
+  padding: 8px!important;
+}
+
+.details img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.details video {
+  width: 100%;
+  border-radius: 6px;
+}
+
+.details-img {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-img span {
+  margin-top: 10px;
+  padding-left: 6px;
+}
+
 .typing-area {
   padding: 18px 30px;
   display: flex;
@@ -532,6 +558,142 @@ header > .details {
   color: #333;
 }
 
+.bi-paperclip {
+  width: 30px;
+  height: 30px;
+  color: #333;
+}
+#preview-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
+
+
+.preview-container-overlay::before {
+  background-color:#000;
+  opacity: 0.7;
+  width: 5000em;
+  content: "";
+  height: 5000em;
+  left: -2500em;
+  top: -2500em;
+  position: fixed;
+}
+
+#preview {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+}
+
+#preview-title-bar {
+  display: flex;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  background-color: #333;
+  font-size: 16px;
+  padding: 16px 36px;
+  color: white;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#title-bar-controls {
+  border-radius: 50%;
+  font-size: 16px;
+}
+
+#close-preview-button {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  background-color: black;
+  color: white;
+  border: none;
+  transition: 0.2s;
+}
+
+#close-preview-button:hover {
+  color: #333;
+  background-color: white;
+}
+
+#preview-content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 14px 36px 25px;
+  justify-content: center;
+  align-items: center;
+}
+
+#previewImageContainer {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  background-color: #f7f7f7;
+  
+}
+
+#preview img {
+  height: 50vh;
+  border-radius: 0;
+}
+
+#preview video {
+  height: 50vh;
+  border-radius: 0;
+}
+
+#preview-input {
+  margin-top: 10px;
+  border-radius: 5px;
+  padding: 10px 50px 10px 10px;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 20px;
+  font-size: 14px;
+  color: var(--color-main);
+  letter-spacing: 0.01em;
+  width: 100%;
+  margin: 20px;
+}
+
+#preview-button {
+  border-radius: 5px;
+  height: auto;
+  width: auto;
+  align-self: flex-end;
+  background-color: #333;
+  border: none;
+  color: white;
+  padding: 10px;
+}
+
+
+#attachmentButton {
+  background-color: transparent;
+  z-index: 1;
+}
 
 /* Activity Log CSS */
 .dropdown > button {
@@ -693,13 +855,14 @@ header > .details {
 
 /* Responive media query */
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 576px) {
   body {
     padding: 0;
   }
 
   .wrapper {
     height: 100vh;
+    width: 100%;
     border-radius: 0;
   }
 
@@ -761,7 +924,7 @@ header > .details {
   .chat-box .incoming .details {
     max-width: 265px;
   }
-  .incoming .details img {
+  .incoming .details .incoming-img {
     height: 30px;
     width: 30px;
   }
@@ -780,6 +943,10 @@ header > .details {
   }
   .chat-area form button {
     width: 45px;
+  }
+
+  .details-wrapper {
+    max-width: 85%!important;
   }
 
   .activity-list {

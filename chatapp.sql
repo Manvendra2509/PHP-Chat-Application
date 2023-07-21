@@ -6,7 +6,9 @@ CREATE TABLE `messages` (
   `msg_id` int(11) NOT NULL AUTO_INCREMENT,
   `incoming_msg_id` int(255) NOT NULL,
   `outgoing_msg_id` int(255) NOT NULL,
-  `msg` varchar(1000) NOT NULL,
+  `msg` varchar(65535),
+  `path` varchar(65535),
+  `type` ENUM('text', 'image', 'video', 'audio') NOT NULL,
   `timestamp` timestamp NOT NULL,
   `session_id` int(11) NOT NULL,
   PRIMARY KEY (`msg_id`)
@@ -35,7 +37,6 @@ CREATE TABLE `activity` (
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `lastseen`, `role`) 
 VALUES (NULL, '134451108', 'Manvendra', 'Singh', 'msingh4@baskethunt.in', '8bbdc640ad83fe10b589af830cc5f6cf', '1686739850IMG_20221218_184509.png', 'Active now', '2023-06-20 18:38:37', 'Admin')
-COMMIT;
 
 CREATE TABLE `homepage` (
   `id` int(11) NOT NULL,
