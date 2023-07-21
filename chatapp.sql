@@ -29,10 +29,12 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `activity` (
-  `activity_id` int(11) NOT NULL,
+  `activity_id` int(11) NOT NULL AUTO_INCREMENT,
+  `session_id` int(11) NOT NULL,
   `timestamp` timestamp NULL DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  `activity_description` mediumtext NOT NULL
+  `activity_description` mediumtext NOT NULL,
+  PRIMARY KEY (`activity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `lastseen`, `role`) 

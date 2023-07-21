@@ -17,7 +17,7 @@ if (!empty($password)) {
             $_SESSION['pass'] = $row['password'];
             $_SESSION['logintime'] = date('Y-m-d H:i:s');
             $_SESSION['session_id'] = mysqli_insert_id($conn);
-            $sql3 = mysqli_query($conn, "INSERT INTO activity (user_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}','{$_SESSION['logintime']}', 'Logged In')");
+            $sql3 = mysqli_query($conn, "INSERT INTO activity (user_id, session_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}', '{$_SESSION['session_id']}', '{$_SESSION['logintime']}', 'Logged In')");
             echo "success";
         } else {
             echo "Something went wrong. Please try again!";

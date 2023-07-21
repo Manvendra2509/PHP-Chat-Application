@@ -31,6 +31,7 @@ if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === UPLOAD_ER
         }
         $sql = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg, path, type, timestamp, session_id)
                                         VALUES ({$incoming_id}, {$outgoing_id}, '{$caption}', '{$filename}','{$type}','{$timestamp}', '{$_SESSION['session_id']}')") or die();
+                                        $sql2 = mysqli_query($conn, "INSERT INTO activity (session_id, timestamp, user_id, activity_description) VALUES ('{$_SESSION['session_id']}', '{$timestamp}', '{$outgoing_id}', 'User sent {$type} attachment to User ID: {$incoming_id}')");
         echo 'File uploaded.';
     } else {
         // Handle upload error

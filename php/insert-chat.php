@@ -10,7 +10,7 @@ if (isset($_SESSION['unique_id'])) {
     if (!empty($message)) {
         $sql = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg, type, timestamp, session_id)
                                         VALUES ({$incoming_id}, {$outgoing_id}, '{$message}','text','{$timestamp}', '{$_SESSION['session_id']}')") or die();
-        $sql2 = mysqli_query($conn, "INSERT INTO activity (timestamp, user_id, activity_description) VALUES ('{$timestamp}', '{$outgoing_id}', 'User sent message \"{$message}\" to User ID: {$incoming_id}')");
+        $sql2 = mysqli_query($conn, "INSERT INTO activity (session_id, timestamp, user_id, activity_description) VALUES ('{$_SESSION['session_id']}', '{$timestamp}', '{$outgoing_id}', 'User sent message \"{$message}\" to User ID: {$incoming_id}')");
     }
 } else {
     header("location: ../index.php");
