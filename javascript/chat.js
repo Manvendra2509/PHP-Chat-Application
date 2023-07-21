@@ -189,10 +189,10 @@ function submitFile() {
   caption = document.getElementById("preview-input").value;
 
   // Ensure both file and caption are selected
-  if (selectedImage) {
+  if (selectedFile) {
     // Create a new FormData object and append the file and caption
     const formData = new FormData();
-    formData.append("attachment", selectedImage);
+    formData.append("attachment", selectedFile);
     formData.append("caption", caption);
 
     // Send the form data to the server using Fetch API or XMLHttpRequest
