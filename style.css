@@ -344,7 +344,7 @@ header > .details {
 .chat-box .chat {
   margin: 15px 0;
 }
-.chat-box .chat .details{
+.chat-box .chat .details {
   word-wrap: break-word;
   padding: 8px 16px;
   box-shadow: 0 0 32px rgb(0 0 0 / 8%), 0rem 16px 16px -16px rgb(0 0 0 / 10%);
@@ -394,8 +394,8 @@ header > .details {
 }
 
 .details-wrapper {
-  max-width: 50%!important;
-  padding: 8px!important;
+  max-width: 50% !important;
+  padding: 8px !important;
 }
 
 .details img {
@@ -449,7 +449,6 @@ header > .details {
   opacity: 1;
   pointer-events: auto;
 }
-
 
 .chat-utilities {
   display: flex;
@@ -575,10 +574,8 @@ header > .details {
   z-index: 1000;
 }
 
-
-
 .preview-container-overlay::before {
-  background-color:#000;
+  background-color: #000;
   opacity: 0.7;
   width: 5000em;
   content: "";
@@ -650,7 +647,6 @@ header > .details {
   justify-content: center;
   margin-top: 10px;
   background-color: #f7f7f7;
-  
 }
 
 #preview img {
@@ -689,7 +685,6 @@ header > .details {
   padding: 10px;
 }
 
-
 #attachmentButton {
   background-color: transparent;
   z-index: 1;
@@ -714,10 +709,6 @@ header > .details {
   justify-content: space-between;
 }
 
-.activity-list .content {
-  margin-top: 25px;
-}
-
 .activity-list .details {
   display: flex;
   flex-direction: column;
@@ -733,30 +724,50 @@ header > .details {
 }
 :is(.activity, .activity-list) .content {
   display: flex;
-  align-items: center;
 }
 :is(.activity, .activity-list) .content .details {
   color: #000;
   margin-left: 20px;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
+  text-transform: none;
+  font-size: 12px;
+  line-height: 18px;
+  padding-bottom: 28px;
 }
 :is(.activity, .activity-list) .details span {
   font-size: 18px;
   font-weight: 500;
 }
 
+.indicator {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  top: 0;
+}
+
 .dot {
   display: flex;
   width: 10px;
   height: 10px;
+  background-color: rgb(255, 255, 255);
+  border-color: rgb(0, 189, 165);
   border-radius: 50%;
-  background-color: #86b7e7;
-  color: white;
+  border-style: solid;
+  border-width: 2px;
 }
 
-.dot::before {
-  background-color: #333;
-  height: auto;
-  content: "";
+.line {
+  color: #cbd6e2;
+  flex: 1 0 auto;
+  border-left: 2px solid currentColor;
+  border-top: 0;
+  content: " ";
+  display: inline-block;
+  position: relative;
+  width: auto;
 }
 
 .activity header .logout {
@@ -934,9 +945,9 @@ header > .details {
 
   .chat-utilities .utility-container ul li {
     height: 40px;
-    width: 40px
+    width: 40px;
   }
-  
+
   .chat-area form input {
     height: 40px;
     width: calc(100% - 48px);
@@ -946,7 +957,7 @@ header > .details {
   }
 
   .details-wrapper {
-    max-width: 85%!important;
+    max-width: 85% !important;
   }
 
   .activity-list {
