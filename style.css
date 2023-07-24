@@ -725,19 +725,27 @@ header > .details {
 :is(.activity, .activity-list) .content {
   display: flex;
 }
+
+header > .content {
+  align-items: center;
+}
+
 :is(.activity, .activity-list) .content .details {
   color: #000;
   margin-left: 20px;
+}
+:is(.activity, .activity-list) .details span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.activity-list .content .details {
   font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
   text-transform: none;
   font-size: 12px;
   line-height: 18px;
   padding-bottom: 28px;
-}
-:is(.activity, .activity-list) .details span {
-  font-size: 18px;
-  font-weight: 500;
 }
 
 .indicator {
