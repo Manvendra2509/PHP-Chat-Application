@@ -1,3 +1,4 @@
+// Code that handles the login form submission by submitting the input data through an AJAX POST request
 const form = document.querySelector(".login form"),
 continueBtn = form.querySelector(".button input"),
 errorText = form.querySelector(".error-text");

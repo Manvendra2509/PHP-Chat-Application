@@ -46,5 +46,13 @@ CREATE TABLE `homepage` (
   `display` enum('Yes','No','','') NOT NULL DEFAULT 'Yes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+CREATE TABLE `sessions` (
+  `session_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(255) NOT NULL,
+  `logintime` timestamp NULL,
+  `logouttime` timestamp NULL,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 INSERT INTO `homepage` (`id`, `title`, `display`) VALUES
 (0, 'ChatApp', 'No');

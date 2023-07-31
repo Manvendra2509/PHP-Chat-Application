@@ -323,6 +323,26 @@ header > .details {
   font-size: 17px;
   font-weight: 500;
 }
+
+.chat-area header .chat-img-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.chat-area header .chat-img-container .status-dot {
+  position: absolute;
+  font-size: 12px;
+  color: #468669;
+  bottom: 0;
+  right: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.chat-area header .chat-img-container .status-dot.offline  {
+  color: #ccc;
+}
+
 .chat-box {
   height: auto;
   flex-grow: 1;
@@ -739,6 +759,10 @@ header > .content {
   font-weight: 500;
 }
 
+.activity-list .content {
+  margin-left: 20px;
+}
+
 .activity-list .content .details {
   font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
@@ -747,6 +771,8 @@ header > .content {
   line-height: 18px;
   padding-bottom: 28px;
 }
+
+
 
 .indicator {
   align-items: center;
@@ -846,6 +872,20 @@ header > .content {
 :is(.activity-list, .chat-box)::-webkit-scrollbar {
   width: 0px;
 }
+
+.session-div-header {
+  display: flex;
+}
+
+.session-div-arrow {
+  color: rgb(0, 145, 174);
+  transition: all 150ms ease-out 0s;
+}
+
+.session-div-title {
+  padding-left: 10px;
+}
+
 .activity-list a {
   padding-bottom: 10px;
   margin-bottom: 15px;

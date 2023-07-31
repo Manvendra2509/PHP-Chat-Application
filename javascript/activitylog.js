@@ -1,6 +1,6 @@
 activityList = document.querySelector(".activity-list");
 
-setInterval(() =>{
+function activityData(){
   let xhr = new XMLHttpRequest();
   xhr.open("GET", "php/activity_log.php", true);
   xhr.onload = ()=>{
@@ -12,5 +12,6 @@ setInterval(() =>{
     }
   }
   xhr.send();
-}, 500);
+};
 
+activityData();

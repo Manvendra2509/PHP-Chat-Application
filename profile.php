@@ -10,7 +10,7 @@ if (!isset($_SESSION['unique_id'])) {
 <?php include_once "header.php";
 include_once "php/config.php";
 $timestamp = date('Y-m-d H:i:s');
-$sql1 = mysqli_query($conn, "INSERT INTO activity (user_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}', '{$timestamp}', 'Opened profile settings page')");
+$sql1 = mysqli_query($conn, "INSERT INTO activity (user_id, session_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}', '{$_SESSION['session_id']}', '{$timestamp}', 'Opened profile settings page')");
 ?>
 
 <body>

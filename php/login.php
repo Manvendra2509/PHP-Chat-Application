@@ -8,8 +8,7 @@ if (!empty($password)) {
     $sql = mysqli_query($conn, "SELECT * FROM users WHERE password = '{$user_pass}'");
     if (mysqli_num_rows($sql) > 0) {
         $row = mysqli_fetch_assoc($sql);
-        $status = "Active now";
-        
+        $status = "Active now";        
         $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
         if ($sql2) {
             $_SESSION['unique_id'] = $row['unique_id'];
@@ -17,7 +16,10 @@ if (!empty($password)) {
             $_SESSION['pass'] = $row['password'];
             $_SESSION['logintime'] = date('Y-m-d H:i:s');
             $_SESSION['session_id'] = mysqli_insert_id($conn);
-            $sql3 = mysqli_query($conn, "INSERT INTO activity (user_id, session_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}', '{$_SESSION['session_id']}', '{$_SESSION['logintime']}', 'Logged In')");
+            $sql3 = mysqli_query($conn, "INSERT INTO sessions (user_id, logintime)
+                                VALUES ('{$_SESSION['unique_id']}','{$_SESSION['logintime']}')");
+            $_SESSION['session_id'] = mysqli_insert_id($conn);
+            $sql4 = mysqli_query($conn, "INSERT INTO activity (user_id, session_id, timestamp, activity_description) VALUES ('{$_SESSION['unique_id']}', '{$_SESSION['session_id']}', '{$_SESSION['logintime']}', 'Logged In')");
             echo "success";
         } else {
             echo "Something went wrong. Please try again!";

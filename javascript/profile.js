@@ -1,3 +1,4 @@
+// Code for sending the data for updating profile settings through an AJAX POST request to the update-profile.php file that handles the database changes
 const form = document.querySelector(".signup form"),
 continueBtn = form.querySelector(".button input"),
 errorText = form.querySelector(".error-text");

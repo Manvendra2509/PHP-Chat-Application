@@ -13,14 +13,19 @@ form.onsubmit = (e) => {
   e.preventDefault();
 };
 
+// Focus on the input field initially
 inputField.focus();
-inputField.onkeyup = () => {
-  if (inputField.value != "") {
+
+// Function to check and update the send button's active state
+function updateSendButtonState() {
+  if (inputField.value.trim() !== "") {
     sendBtn.classList.add("active");
   } else {
     sendBtn.classList.remove("active");
   }
-};
+}
+
+inputField.addEventListener("input", updateSendButtonState);
 
 // Emoji Panel Code Start
 const emojiSelectorIcon = document.getElementById("emojiSelectorIcon");
@@ -47,6 +52,7 @@ function loadEmoji(data) {
     li.textContent = emoji.character;
     li.addEventListener("click", () => {
       inputArea.value += emoji.character;
+      updateSendButtonState();
     });
     emojiList.appendChild(li);
   });
@@ -85,6 +91,7 @@ sendBtn.onclick = () => {
     if (xhr.readyState === XMLHttpRequest.DONE) {
       if (xhr.status === 200) {
         inputField.value = "";
+        updateSendButtonState(); // Reset the send button's active state
         scrollToBottom();
       }
     }
@@ -92,6 +99,7 @@ sendBtn.onclick = () => {
   let formData = new FormData(form);
   xhr.send(formData);
 };
+
 chatBox.onmouseenter = () => {
   chatBox.classList.add("active");
 };

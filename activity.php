@@ -53,7 +53,7 @@ if (!isset($_SESSION['unique_id']) or $_SESSION['role'] != "Admin") {
                             <li><a class="dropdown-item" href="homepage_settings.php">Homepage Settings</a></li>
                         <?php } ?>
                         <li><a class="dropdown-item"
-                                href="php/logout.php?logout_id=<?php echo $_SESSION['unique_id']; ?>">Logout</a></li>
+                                href="php/logout.php">Logout</a></li>
                     </ul>
                 </div>
             </header>

@@ -46,7 +46,7 @@ if (!isset($_SESSION['unique_id'])) {
             <li><a class="dropdown-item" href="register.php">Add Users</a></li> 
             <li><a class="dropdown-item" href="homepage_settings.php">Homepage Settings</a></li> 
             <?php } ?>
-            <li><a class="dropdown-item" href="php/logout.php?logout_id=<?php echo $_SESSION['unique_id']; ?>">Logout</a></li>
+            <li><a class="dropdown-item" href="php/logout.php">Logout</a></li>
           </ul>
         </div>
       </header>

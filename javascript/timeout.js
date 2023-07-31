@@ -1,16 +1,16 @@
-
+// Code to handle automatic logout in case of inactivity
 var inactivityTimeout = 18000; // Timeout in seconds (3 minutes)
 var timer;
 
 // Function to reset the timer
 function resetTimer() {
-    clearTimeout(timer);
-    timer = setTimeout(logout, inactivityTimeout * 1000);
+  clearTimeout(timer);
+  timer = setTimeout(logout, inactivityTimeout * 1000);
 }
 
 // Function to handle logout
 function logout() {
-    window.location.href = "php/logout.php?logout_id=" + uniqueId;
+  window.location.href = "php/logout.php";
 }
 
 // Attach event listeners to track user activity
