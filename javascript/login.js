@@ -25,9 +25,10 @@ continueBtn.onclick = () => {
                 let data = xhr.response;
 
                 // Check if the login was successful (the server returned "success")
-                if (data === "success") {
+                if (data === "User added!") {
                     // If login is successful, redirect the user to the "users.php" page
-                    location.href = "users.php";
+                    successText.style.display = "block";
+                    successText.style.textContent = data;
                 } else {
                     // If login failed, display the error message returned from the server
                     errorText.style.display = "block";

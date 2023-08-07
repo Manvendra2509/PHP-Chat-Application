@@ -66,11 +66,25 @@ if ($_SESSION['role'] != "Admin") {
         </div>
         <!-- Link to go back to the users.php page -->
         <div class="link"><a href="users.php">Go back</a></div>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img src="./php/images/logo-square.png" class="rounded me-2" alt="..." height="20px">
+              <strong class="me-auto">Add Users</strong>
+              <small>now</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+              The user has been added successfully.
+            </div>
+          </div>
+        </div>
       </form>
     </section>
   </div>
 
   <!-- JavaScript code to show/hide password -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
   <script src="javascript/pass-show-hide.js"></script>
   <!-- JavaScript code for handling user registration -->
   <script src="javascript/signup.js"></script>

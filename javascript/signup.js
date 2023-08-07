@@ -2,6 +2,8 @@
 const form = document.querySelector(".signup form");
 const continueBtn = form.querySelector(".button input");
 const errorText = form.querySelector(".error-text");
+const toastLiveExample = document.getElementById('liveToast');
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
 
 // Prevent the form from submitting in the traditional way (page reload)
 form.onsubmit = (e) => {
@@ -23,12 +25,14 @@ continueBtn.onclick = () => {
         // Get the response data from the server
         let data = xhr.response;
         if (data === "success") {
-          // If the response is "success," redirect to the users.php page
-          location.href = "users.php";
+          errorText.style.display = "none";          
+          toastBootstrap.show();
+          form.reset();
         } else {
           // If the response is an error message, display it in the error text element
           errorText.style.display = "block";
           errorText.textContent = data;
+          alertSuccess.style.display = "none"
         }
       }
     }
