@@ -1,14 +1,15 @@
-const form = document.querySelector(".typing-area"),
-  incoming_id = form.querySelector(".incoming_id").value,
-  inputField = form.querySelector(".input-field"),
-  sendBtn = form.querySelector(".send-button"),
-  chatBox = document.querySelector(".chat-box");
-const tooltipTriggerList = document.querySelectorAll(
-  '[data-bs-toggle="tooltip"]'
-);
-const tooltipList = [...tooltipTriggerList].map(
-  (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
-);
+// Select required DOM elements for chat functionality
+const form = document.querySelector(".typing-area");
+const incoming_id = form.querySelector(".incoming_id").value;
+const inputField = form.querySelector(".input-field");
+const sendBtn = form.querySelector(".send-button");
+const chatBox = document.querySelector(".chat-box");
+
+// Initialize Bootstrap tooltips for any elements with data-bs-toggle="tooltip"
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+const tooltipList = [...tooltipTriggerList].map((tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl));
+
+// Prevent form submission when pressing Enter in the input field
 form.onsubmit = (e) => {
   e.preventDefault();
 };
@@ -16,7 +17,7 @@ form.onsubmit = (e) => {
 // Focus on the input field initially
 inputField.focus();
 
-// Function to check and update the send button's active state
+// Function to check and update the send button's active state based on input field content
 function updateSendButtonState() {
   if (inputField.value.trim() !== "") {
     sendBtn.classList.add("active");
@@ -25,7 +26,78 @@ function updateSendButtonState() {
   }
 }
 
+// Add event listener to the input field to update the send button's state on input
 inputField.addEventListener("input", updateSendButtonState);
+
+// Function to send the message when the send button is clicked
+sendBtn.onclick = () => {
+  // Create a new XMLHttpRequest to send the chat message to the server
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "php/insert-chat.php", true);
+  xhr.onload = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        // Clear the input field and reset the send button's active state
+        inputField.value = "";
+        updateSendButtonState();
+        scrollToBottom(); // Scroll to the bottom of the chat box to see the new message
+      }
+    }
+  };
+  let formData = new FormData(form); // Create a FormData object from the form to send data
+  xhr.send(formData); // Send the message data to the server
+};
+
+// Show the chat box when the mouse enters, and hide it when the mouse leaves
+chatBox.onmouseenter = () => {
+  chatBox.classList.add("active");
+};
+
+chatBox.onmouseleave = () => {
+  chatBox.classList.remove("active");
+};
+
+// Store the ID of the last received message to request new messages from the server
+let lastReceivedMsgId = 0; // Set the initial value to 0 or null if no messages have been received
+
+// Function to update the chat with new messages from the server
+function updateChat() {
+  // Create a new XMLHttpRequest to fetch new messages from the server
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "php/get-chat.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  // Send the incoming_id and lastReceivedMsgId to the server as parameters
+  const params = "incoming_id=" + incoming_id + "&last_received_msg_id=" + lastReceivedMsgId;
+  xhr.onload = () => {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      if (xhr.status === 200) {
+        // Parse the JSON response from the server
+        let data = JSON.parse(xhr.responseText);
+        let newMessages = data.output; // Get the new messages from the server
+        lastReceivedMsgId = data.last_received_msg_id; // Update the last received message ID
+
+        // Append the new messages to the chat box
+        chatBox.innerHTML += newMessages;
+
+        // Scroll to the bottom only if the chat box is not active (i.e., user is not viewing old messages)
+        if (!chatBox.classList.contains("active")) {
+          scrollToBottom();
+        }
+      }
+    }
+  };
+  xhr.send(params); // Send the parameters to the server to fetch new messages
+}
+
+// Call updateChat initially and every 500 milliseconds to fetch new messages
+updateChat();
+setInterval(updateChat, 500);
+
+// Function to scroll to the bottom of the chat box
+function scrollToBottom() {
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
 
 // Emoji Panel Code Start
 const emojiSelectorIcon = document.getElementById("emojiSelectorIcon");
@@ -84,69 +156,7 @@ document.addEventListener("mousedown", (event) => {
 });
 //Emoji Panel Code End
 
-sendBtn.onclick = () => {
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", "php/insert-chat.php", true);
-  xhr.onload = () => {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        inputField.value = "";
-        updateSendButtonState(); // Reset the send button's active state
-        scrollToBottom();
-      }
-    }
-  };
-  let formData = new FormData(form);
-  xhr.send(formData);
-};
-
-chatBox.onmouseenter = () => {
-  chatBox.classList.add("active");
-};
-
-chatBox.onmouseleave = () => {
-  chatBox.classList.remove("active");
-};
-
-let lastReceivedMsgId = 0; // Set the initial value to 0 or null if no messages have been received
-
-function updateChat() {
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", "php/get-chat.php", true);
-  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-  // Send the incoming_id and lastReceivedMsgId to the server
-  const params = "incoming_id=" + incoming_id + "&last_received_msg_id=" + lastReceivedMsgId;
-  xhr.onload = () => {
-    if (xhr.readyState === XMLHttpRequest.DONE) {
-      if (xhr.status === 200) {
-        let data = JSON.parse(xhr.responseText);
-        let newMessages = data.output;
-        lastReceivedMsgId = data.last_received_msg_id; // Update the last received msg_id
-
-        chatBox.innerHTML += newMessages;
-
-        // Scroll to the bottom only if new messages are received
-        if (!chatBox.classList.contains("active")) {
-          scrollToBottom();
-        }
-      }
-    }
-  };
-  xhr.send(params);
-}
-
-// Call updateChat initially and every 500 milliseconds
-updateChat();
-setInterval(updateChat, 500);
-
-
-
-function scrollToBottom() {
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-//Image Attachment Code starts here
+// Attachment Code starts here
 // Store the selected image file and caption in variables
 let selectedImage = null;
 let caption = '';

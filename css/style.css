@@ -717,6 +717,9 @@ header > .details {
   color: black;
 }
 
+.activity-wrapper {
+  width: 95vw;
+}
 .activity {
   padding: 25px 30px;
 }
@@ -866,8 +869,10 @@ header > .content {
 .activity-list {
   text-align: center;
   margin-top: 15px;
-  height: 60vh;
+  height: 70vh;
   overflow-y: auto;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
 }
 :is(.activity-list, .chat-box)::-webkit-scrollbar {
   width: 0px;

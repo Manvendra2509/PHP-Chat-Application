@@ -38,7 +38,7 @@ CREATE TABLE `activity` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `users` (`user_id`, `unique_id`, `fname`, `lname`, `email`, `password`, `img`, `status`, `lastseen`, `role`) 
-VALUES (NULL, '134451108', 'Manvendra', 'Singh', 'msingh4@baskethunt.in', '8bbdc640ad83fe10b589af830cc5f6cf', '1686739850IMG_20221218_184509.png', 'Active now', '2023-06-20 18:38:37', 'Admin')
+VALUES (NULL, '134451108', 'Manvendra', 'Singh', 'msingh4@baskethunt.in', '8bbdc640ad83fe10b589af830cc5f6cf', '1686739850IMG_20221218_184509.png', 'Active now', '2023-06-20 18:38:37', 'Admin');
 
 CREATE TABLE `homepage` (
   `id` int(11) NOT NULL,
